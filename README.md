@@ -2,17 +2,6 @@
 
 This is the documentation for the project. It can be run after compilation, or you can directly invoke it from the jar package.
 
-
-
-**jar execution command**：
-
-```shell
-java -jar PATEN.jar <target_file> <output_folder>
-java -jar PATEN.jar /home/experiment/experiment_dataset/SNYK-JAVA-CNFXBINBUBBLE-1300551/influenced_package/13d880/DoubleJwt.java/bubble-fireworks-plugin-token-0.0.9-RELEASE.jar/tfile.java /root/Experiment
-```
-
-
-
 ## Prerequisites
 
 Before running, ensure that the database has been built (import `vul_database_exp.sql`) and configured correctly.
@@ -25,8 +14,32 @@ Configuration information is located in the `./src/Configure` directory, which i
 
 `RuntimeConfig` is used to specify the locations for runtime temporary files and target files.
 
-The `experiment_dataset` (available at https://github.com/PATEN-Tool/PATEN_Evaluation_TPLs) is recommended to be placed under `/home/experiment/experiment_dataset`.
+The `experiment_dataset` (available at https://github.com/PATEN-Tool/PATEN_Evaluation_TPLs) is recommended to be placed under `/home/experiment/experiment_dataset` and the `experiment_dataset.txt`  placed at `/home/experiment/experiment_set.txt`.
 
+**jar execution command**：
+
+```shell
+java -jar PATEN.jar <target_file> <output_folder>
+e.g.
+java -jar PATEN.jar /home/experiment/experiment_dataset/SNYK-JAVA-ORGAPACHETOMCATEMBED-538488/influenced_package/e19a20/FormAuthenticator.java/tomcat-embed-core-7.0.20.jar/tfile.java /root/Experiment
+```
+
+The output of above command:
+```
+{
+    "Path": "/home/experiment/experiment_dataset/SNYK-JAVA-ORGAPACHETOMCATEMBED-538488/influenced_package/e19a20/FormAuthenticator.java/tomcat-embed-core-7.0.32.jar/tfile.java",
+    "TotalCost": "536",
+    "Analysis Res": "true",
+    "cve_no": "CVE-2019-17563",
+    "group_id": "org.apache.tomcat.embed",
+    "VT Edit distance": "0.42857142857142855",
+    "IOCost": "62",
+    "PT Edit distance": "1.0",
+    "method_longname": "org.apache.catalina.authenticator.FormAuthenticator.matchRequest",
+    "Step": "2",
+    "artifact_id": "tomcat-embed-core"
+}
+```
 ## Main Process
 
 The main process consists of two parts: locating suspicious methods from the input JAR file and the method feature matching phase. The main class is `./src/test/runExp.java`, where the main method implements the locating function. If suspicious methods are found, it transitions to the matching phase.
